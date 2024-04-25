@@ -1,8 +1,6 @@
 import { Router } from "express";
+import { apiRouter } from "./api"
 
-export const router: Router = Router();
+export const appRouter = Router();
 
-
-router.get("/", (request, response) => {
-    response.send("Express + TypeScript Server");
-})
+appRouter.use(apiRouter)
