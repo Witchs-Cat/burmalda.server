@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auth</title>
 </head>
-<h2>Логин</h2>
-<input class="login"/>
-<h2>Пароль</h2>
-<!-- Динамическая верстка из ЧГУ -->
-<input class="password"/><br><br> 
-<button class="submit-button">Войти</button>
 <body>
+    
+    <h2>Логин</h2>
+    <input class="login"/>
+    <h2>Пароль</h2>
+    <!-- Динамическая верстка из ЧГУ -->
+    <input class="password"/><br><br> 
+    <button class="submit-button">Войти</button>
+
+
     <script type="module" src="./api/config.js"> </script>
     <script type="module" src="./api/auth.js"> </script>
     <script type="module" src="./api/users.js"> </script>
@@ -29,7 +32,7 @@
         submitButton.addEventListener("click", loginAsync)
 
         async function loginAsync(){
-            authAsync(loginInput.value, passwordInput.value)
+            await authAsync(loginInput.value, passwordInput.value)
         }
 
         </script>
