@@ -2,7 +2,7 @@ import express, { Express } from "express"
 import { Client } from "pg"
 
 import { appRouter } from "./routes"
-import { UsersRepositry as UsersRepository } from "./repositories"
+import { UsersRepository, dropAsync, initAsync } from "./repositories"
 import { RolesRepositroy } from "./repositories"
 
 const app: Express = express()
@@ -24,12 +24,10 @@ app.set(RolesRepositroy.name, roles)
 
 app.use(appRouter)
 
-app.listen(port, async () => {
+const server = app.listen(port, async () => {
     await dbClient.connect()
-    await Promise.all([
-        roles.initAsync(),
-        users.initAsync()
-    ])
+    await dropAsync(dbClient)
+    await initAsync(dbClient)
 
     console.log(`Server is running at http://127.0.0.1:${port}`)
 })

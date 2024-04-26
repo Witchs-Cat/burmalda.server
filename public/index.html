@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Auth</title>
 </head>
 <body>
     <script type="module" src="./api/auth.js"> </script>
@@ -12,9 +12,7 @@
     <script type="module">
         import { getUsersAsync } from "./api/users.js"
 
-        getUsersAsync()
-            .then(result => console.log(result));
+        getUsersAsync().then(result => console.log(result));
     </script>
-
 </body>
 </html>

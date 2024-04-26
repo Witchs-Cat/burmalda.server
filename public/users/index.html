@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UsersList</title>
+</head>
+<body>
+    <h1>
+        UsersList
+    </h1>
+    <table class="users">
+
+    </table>
+
+
+    <script type="module">
+        const usersTabel = document.getElementsByClassName("users")[0]
+
+
+        function createUserField(user){
+            const view = document.createElement('tr')
+            view.innerHTML = `
+                <td>${user.id}
+                <td>${user.login}
+                <td>${user.fio}
+                <td>${user.role_id}
+            `
+        }
+
+        function showUsers(users){
+            users.forEach(user => {
+                const userView = createUserField(user)
+                usersTabel.append(userView);
+            });
+        }
+
+        import { getUsersAsync } from "./api/users.js"
+        getUsersAsync().then(showUsers);
+    </script>
+</body>
+</html>

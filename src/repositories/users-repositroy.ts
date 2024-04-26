@@ -1,9 +1,8 @@
 import { Client } from "pg";
 
 import { IUser } from "../models/user";
-import { IRepository } from "./repository"
 
-export class UsersRepositry implements IRepository{
+export class UsersRepository{
     private readonly dbClient: Client
 
     constructor(dbClient: Client){
@@ -11,20 +10,22 @@ export class UsersRepositry implements IRepository{
     }
 
     public async initAsync(): Promise<void>{
-        await this.dbClient.query(`
+        const result = await this.dbClient.query(`
             CREATE TABLE IF NOT EXISTS users(
                 id SERIAL PRIMARY KEY,
                 login TEXT,
-                fio TEXT, 
-                role_id INT REFERENCES roles(id) 
+                pass TEXT,
+                fio TEXT,
+                id_role INT REFERENCES roles (id),
+                is_blocked INT default 0
             );`
-        );
-    }
+        )
 
+        console.log(result)
+    }
 
     public async getUsersAsync() : Promise<IUser[] | null> {
         const response = await this.dbClient.query("SELECT * FROM users");
-        
         return response.rows as Array<IUser>
     }
 }
