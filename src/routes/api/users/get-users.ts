@@ -6,5 +6,5 @@ export async function getUsers(request:Request, response: Response){
     const users = await repository.getUsersAsync();
     console.log(users)
 
-    response.json(users?? [])
+    response.json(users ?? [])
 }

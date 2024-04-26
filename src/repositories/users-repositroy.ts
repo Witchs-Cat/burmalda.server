@@ -3,7 +3,7 @@ import { Client } from "pg";
 import { IUser } from "../models/user";
 import { IRepository } from "./repository"
 
-export class UsersRepositry  implements IRepository{
+export class UsersRepositry implements IRepository{
     private readonly dbClient: Client
 
     constructor(dbClient: Client){

@@ -3,10 +3,10 @@ import { Client } from "pg"
 
 import { appRouter } from "./routes"
 import { UsersRepositry as UsersRepository } from "./repositories"
-import { RolesRepositroy } from "./repositories/roles-repository"
+import { RolesRepositroy } from "./repositories"
 
 const app: Express = express()
-const port: Number = 8443
+const port: Number = 8080
 
 const dbClient = new Client({
     host: "localhost",
@@ -18,16 +18,18 @@ const dbClient = new Client({
 
 const roles = new RolesRepositroy(dbClient)
 const users = new UsersRepository(dbClient)
+
 app.set(UsersRepository.name, users)
 app.set(RolesRepositroy.name, roles)
 
-app.use("/", appRouter)
+app.use(appRouter)
 
 app.listen(port, async () => {
     await dbClient.connect()
-
-    await roles.initAsync()
-    await users.initAsync()
+    await Promise.all([
+        roles.initAsync(),
+        users.initAsync()
+    ])
 
     console.log(`Server is running at http://127.0.0.1:${port}`)
 })
