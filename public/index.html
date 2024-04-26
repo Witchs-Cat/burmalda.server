@@ -5,14 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auth</title>
 </head>
+<h2>Логин</h2>
+<input class="login"/>
+<h2>Пароль</h2>
+<!-- Динамическая верстка из ЧГУ -->
+<input class="password"/><br><br> 
+<button class="submit-button">Войти</button>
 <body>
+    <script type="module" src="./api/config.js"> </script>
     <script type="module" src="./api/auth.js"> </script>
     <script type="module" src="./api/users.js"> </script>
 
     <script type="module">
-        import { getUsersAsync } from "./api/users.js"
+        import {authAsync} from "./api/auth.js"
 
-        getUsersAsync().then(result => console.log(result));
-    </script>
+        const loginInput = document.querySelector(".login")
+        const passwordInput = document.querySelector(".password")
+        const submitButton = document.querySelector(".submit-button")
+
+
+        // console.log(submitButton)
+
+        submitButton.addEventListener("click", loginAsync)
+
+        async function loginAsync(){
+            authAsync(loginInput.value, passwordInput.value)
+        }
+
+        </script>
 </body>
 </html>

@@ -6,15 +6,21 @@
     <title>UsersList</title>
 </head>
 <body>
-    <h1>
+    <h2>
         UsersList
-    </h1>
+    </h2>
     <table class="users">
-
+        <thead>
+            <td>id</td>
+            <td>login</td>
+            <td>fio</td>
+            <td>id_role</td>
+        </thead>
     </table>
 
 
     <script type="module">
+        import { getUsersAsync } from "../api/users.js"
         const usersTabel = document.getElementsByClassName("users")[0]
 
 
@@ -24,8 +30,9 @@
                 <td>${user.id}
                 <td>${user.login}
                 <td>${user.fio}
-                <td>${user.role_id}
+                <td>${user.id_role}
             `
+            return view
         }
 
         function showUsers(users){
@@ -34,8 +41,6 @@
                 usersTabel.append(userView);
             });
         }
-
-        import { getUsersAsync } from "./api/users.js"
         getUsersAsync().then(showUsers);
     </script>
 </body>

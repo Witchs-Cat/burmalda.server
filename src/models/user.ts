@@ -1,6 +1,8 @@
 export interface IUser {
     id: Number,
     login: String,
+    pass: String,
     fio: String,
-    role_id: Number
+    id_role: Number,
+    is_blocked: Number,
 }
